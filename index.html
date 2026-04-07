@@ -1,0 +1,809 @@
+[family-supplements.html](https://github.com/user-attachments/files/26527592/family-supplements.html)
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家庭健康管理</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f4f6f9; --white:#fff; --border:rgba(0,0,0,0.08);
+  --text:#111827; --sub:#6b7280; --card2:#f8fafc;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;font-size:15px;line-height:1.5}
+
+/* ── HEADER ── */
+header{background:var(--white);padding:16px 16px 0;box-shadow:0 1px 0 var(--border);position:sticky;top:0;z-index:100}
+.htop{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.hico{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.htitle{font-size:18px;font-weight:900;letter-spacing:.3px}
+.hsub{font-size:12px;color:var(--sub)}
+
+/* ── TABS ── */
+.tabs{display:flex;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--border)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:70px;padding:10px 4px 0;cursor:pointer;text-align:center;border:none;border-bottom:3px solid transparent;background:none;transition:.2s}
+.temo{font-size:22px;display:block;margin-bottom:2px}
+.tname{font-size:13px;font-weight:900;display:block}
+.trole{font-size:10px;color:var(--sub);display:block;margin-bottom:8px}
+.tab[data-id="kai"].active{border-bottom-color:#ec4899}.tab[data-id="kai"].active .tname{color:#ec4899}
+.tab[data-id="luo"].active{border-bottom-color:#3b82f6}.tab[data-id="luo"].active .tname{color:#3b82f6}
+.tab[data-id="bo"].active{border-bottom-color:#22c55e}.tab[data-id="bo"].active .tname{color:#22c55e}
+.tab[data-id="mom"].active{border-bottom-color:#f59e0b}.tab[data-id="mom"].active .tname{color:#f59e0b}
+
+/* ── CONTENT ── */
+.pg{display:none;padding:14px 14px 52px}
+.pg.active{display:block;animation:up .25s ease}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── BANNER ── */
+.banner{border-radius:20px;padding:16px 18px;margin-bottom:14px}
+.bk{background:linear-gradient(135deg,#fdf2f8,#fce7f3);border:1.5px solid #f9a8d4}
+.bl2{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1.5px solid #93c5fd}
+.bg{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac}
+.bo{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fcd34d}
+.btop{display:flex;align-items:center;gap:14px}
+.bemo{font-size:44px;line-height:1}
+.bname{font-size:20px;font-weight:900}
+.brole{font-size:13px;color:var(--sub);margin-top:3px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tag{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:700}
+.tp{background:#fce7f3;color:#be185d}
+.tb{background:#dbeafe;color:#1d4ed8}
+.tg{background:#dcfce7;color:#15803d}
+.to{background:#fef3c7;color:#b45309}
+.tv{background:#ede9fe;color:#6d28d9}
+.tr{background:#fee2e2;color:#b91c1c}
+
+/* ── SCHEDULE ── */
+.sch{background:var(--white);border-radius:16px;padding:14px 16px;margin-bottom:12px;border:1px solid var(--border)}
+.sch-title{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:1.5px;margin-bottom:10px}
+.srows{display:flex;flex-direction:column;gap:10px}
+.srow{display:flex;align-items:flex-start;gap:10px}
+.sbadge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.sbm{background:#fef3c7;color:#b45309}
+.sbn{background:#dbeafe;color:#1d4ed8}
+.sbl{background:#ede9fe;color:#6d28d9}
+.sbo{background:#fff7ed;color:#c2410c}
+.sdesc{font-size:14px;font-weight:700;line-height:1.4}
+.skws{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.skw{font-size:11px;padding:2px 8px;border-radius:8px;font-weight:700;background:#f1f5f9;color:#374151}
+
+/* ── SECTION LABEL ── */
+.sec{font-size:11px;font-weight:700;color:var(--sub);letter-spacing:2px;margin:16px 0 8px;padding-left:2px}
+
+/* ── SUPPLEMENT CARD ── */
+.card{background:var(--white);border-radius:18px;margin-bottom:10px;border:1px solid var(--border);overflow:hidden}
+.card-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.card-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.card-meta{flex:1;min-width:0}
+.card-name{font-size:15px;font-weight:900;line-height:1.3}
+.card-brand{font-size:11px;color:var(--sub);margin-top:2px}
+.pill{font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.pp{background:#fce7f3;color:#be185d}
+.pb{background:#dbeafe;color:#1d4ed8}
+.pg2{background:#dcfce7;color:#15803d}
+.po{background:#fef3c7;color:#b45309}
+.pv{background:#ede9fe;color:#6d28d9}
+.chev{color:var(--sub);font-size:18px;transition:.3s;flex-shrink:0;margin-left:2px}
+.card.open .chev{transform:rotate(180deg)}
+
+.card-body{display:none;padding:0 16px 16px}
+.card.open .card-body{display:block;animation:up .2s ease}
+.divider{height:1px;background:var(--border);margin-bottom:14px}
+
+/* keywords highlight row */
+.kwrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.kwrow span{font-size:12px;font-weight:700;padding:4px 11px;border-radius:20px}
+
+/* benefit items */
+.blist{display:flex;flex-direction:column;gap:8px}
+.bitem{display:flex;gap:10px;align-items:flex-start;background:var(--card2);padding:11px 13px;border-radius:13px}
+.bico{font-size:18px;flex-shrink:0;margin-top:1px}
+.btxt{font-size:13px;line-height:1.6}
+.blabel{font-weight:900;font-size:13px;display:block;margin-bottom:1px}
+
+/* nutrition table */
+.ntbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+.ntbl th{background:var(--card2);padding:6px 10px;text-align:left;color:var(--sub);font-size:11px;font-weight:700}
+.ntbl td{padding:8px 10px;border-bottom:1px solid var(--border);font-size:13px}
+.ntbl tr:last-child td{border:none}
+.nv{font-weight:900;color:#1d4ed8}
+
+/* dosage box */
+.dbox{margin-top:12px;padding:13px 14px;border-radius:13px;display:flex;gap:10px;align-items:flex-start}
+.dbox-ico{font-size:20px;flex-shrink:0}
+.dbox-txt{font-size:13px;line-height:1.6}
+.dbox-title{font-weight:900;font-size:13px;margin-bottom:2px}
+.db-pk{background:#fdf2f8;border:1px solid #fbcfe8}
+.db-bl{background:#eff6ff;border:1px solid #bfdbfe}
+.db-gr{background:#f0fdf4;border:1px solid #bbf7d0}
+.db-or{background:#fffbeb;border:1px solid #fde68a}
+.db-vl{background:#f5f3ff;border:1px solid #ddd6fe}
+
+/* alert boxes */
+.alert{margin-top:10px;padding:13px 14px;border-radius:14px;display:flex;gap:10px}
+.alert-txt{font-size:13px;line-height:1.6}
+.alert-title{font-weight:900;font-size:13px;margin-bottom:3px}
+.a-ye{background:#fffbeb;border:1px solid #fde68a}
+.a-rd{background:#fff1f2;border:1px solid #fecaca}
+.a-bl{background:#eff6ff;border:1px solid #bfdbfe}
+.a-gr{background:#f0fdf4;border:1px solid #bbf7d0}
+.a-or{background:#fff7ed;border:1px solid #fed7aa}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="htop">
+    <div class="hico">🏠</div>
+    <div>
+      <div class="htitle">家庭健康管理</div>
+      <div class="hsub">點選成員 · 查看補劑計劃</div>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" data-id="kai" onclick="sw('kai')">
+      <span class="temo">👧</span><span class="tname">楷宸</span><span class="trole">體育生</span>
+    </div>
+    <div class="tab" data-id="luo" onclick="sw('luo')">
+      <span class="temo">👩</span><span class="tname">珞熙</span><span class="trole">高壓工作</span>
+    </div>
+    <div class="tab" data-id="bo" onclick="sw('bo')">
+      <span class="temo">💪</span><span class="tname">伯涵</span><span class="trole">羽球教練</span>
+    </div>
+    <div class="tab" data-id="mom" onclick="sw('mom')">
+      <span class="temo">👵</span><span class="tname">媽媽</span><span class="trole">63歲</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════
+     楷宸
+══════════════════════════ -->
+<div class="pg active" id="c-kai">
+  <div class="banner bk">
+    <div class="btop">
+      <div class="bemo">👧</div>
+      <div><div class="bname">楷宸</div><div class="brole">國中體育生 · 羽球 · 角膜塑形片</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag tp">🦴 長高衝刺</span>
+      <span class="tag to">😴 難入睡</span>
+      <span class="tag tb">👁️ 近視散光</span>
+      <span class="tag tg">💪 運動發育</span>
+    </div>
+  </div>
+
+  <div class="sch">
+    <div class="sch-title">⏰ 每日時程</div>
+    <div class="srows">
+      <div class="srow"><span class="sbadge sbm">☀️ 早餐後</span><div><div class="sdesc">葉黃素 1 粒</div><div class="skws"><span class="skw">護眼抗藍光</span></div></div></div>
+      <div class="srow"><span class="sbadge sbl">🌙 睡前 10:30</span><div><div class="sdesc">鈣鎂鋅 3 片 ＋ 益生元纖維 1 勺</div><div class="skws"><span class="skw">骨骼原料</span><span class="skw">助眠</span><span class="skw">啟動生長激素</span></div></div></div>
+    </div>
+    <div class="alert a-ye" style="margin-top:12px">
+      <span>💡</span>
+      <div class="alert-txt"><div class="alert-title">10:30 睡覺不晚！剛剛好</div>生長激素高峰 = 晚上 11 點到凌晨 2 點。10:30 服用補劑讓鎂作用，11 點前進入深眠，黃金時段全中。</div>
+    </div>
+  </div>
+
+  <div class="sec">💊 補劑詳情</div>
+
+  <div class="card" id="k1">
+    <div class="card-head" onclick="tog('k1')">
+      <div class="card-ico" style="background:#fce7f3">💊</div>
+      <div class="card-meta"><div class="card-name">鈣鎂鋅 + D3</div><div class="card-brand">21st Century</div></div>
+      <div class="pill pp">睡前 3 片</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fce7f3;color:#be185d">🦴 骨骼原料</span>
+        <span style="background:#ede9fe;color:#6d28d9">😴 神經安定</span>
+        <span style="background:#dcfce7;color:#15803d">⚡ 生長激素</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🦴</div><div class="btxt"><span class="blabel">骨骼原料</span>鈣：骨頭的磚塊｜鎂：天然鬆弛劑｜2:1 黃金比例，強化骨質、緩解生長痛</div></div>
+        <div class="bitem"><div class="bico">😴</div><div class="btxt"><span class="blabel">助眠</span>鎂穩定副交感神經 → 肌肉放鬆 → 快速入睡</div></div>
+        <div class="bitem"><div class="bico">⚡</div><div class="btxt"><span class="blabel">生長激素啟動</span>鋅是蛋白質合成關鍵，直接影響生長激素分泌量</div></div>
+        <div class="bitem"><div class="bico">☀️</div><div class="btxt"><span class="blabel">D3 = 鈣質搬運工</span>沒有 D3，吃再多鈣也白費</div></div>
+      </div>
+      <table class="ntbl">
+        <tr><th>成分</th><th>每次（3片）</th><th>%DV</th></tr>
+        <tr><td>維生素 D3</td><td class="nv">400 IU</td><td>50%</td></tr>
+        <tr><td>鈣</td><td class="nv">1,000 mg</td><td>77%</td></tr>
+        <tr><td>鎂</td><td class="nv">400 mg</td><td>95%</td></tr>
+        <tr><td>鋅</td><td class="nv">15 mg</td><td>136%</td></tr>
+      </table>
+      <div class="dbox db-pk"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#be185d">怎麼吃</div>睡前 30-60 分鐘 吃 3 片，配益生元纖維一起吃。❌ 禁：含糖手搖、碳酸飲料（磷排擠鈣）</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="k2">
+    <div class="card-head" onclick="tog('k2')">
+      <div class="card-ico" style="background:#dcfce7">🌿</div>
+      <div class="card-meta"><div class="card-name">益生元纖維 Sunfiber®</div><div class="card-brand">California Gold Nutrition</div></div>
+      <div class="pill pg2">睡前 1 勺</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#ede9fe;color:#6d28d9">😴 助眠基礎</span>
+        <span style="background:#fce7f3;color:#be185d">🦴 吸收加倍</span>
+        <span style="background:#dcfce7;color:#15803d">🌱 腸道穩定</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">😴</div><div class="btxt"><span class="blabel">助眠基礎</span>腸道養出「快樂菌」→ 促進腸腦軸 → 大腦放鬆易入睡</div></div>
+        <div class="bitem"><div class="bico">🦴</div><div class="btxt"><span class="blabel">吸收加倍</span>幫助鈣、鎂更有效被腸道吸收，配鈣鎂鋅事半功倍</div></div>
+        <div class="bitem"><div class="bico">🌱</div><div class="btxt"><span class="blabel">腸道穩定</span>好菌的「肥料」，建立健康菌叢</div></div>
+      </div>
+      <div class="dbox db-gr"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#15803d">怎麼吃</div>睡前 1 勺（6g）加溫水，與鈣鎂鋅同時服用。無味，無麩質，非基改。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="k3">
+    <div class="card-head" onclick="tog('k3')">
+      <div class="card-ico" style="background:#fef3c7">👁️</div>
+      <div class="card-meta"><div class="card-name">葉黃素 + 玉米黃質</div><div class="card-brand">Doctor's Best · Lutemax 2020</div></div>
+      <div class="pill po">早餐後 1 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fef3c7;color:#b45309">📱 抗藍光</span>
+        <span style="background:#dbeafe;color:#1d4ed8">🔍 護黃斑</span>
+        <span style="background:#dcfce7;color:#15803d">☀️ 戶外護眼</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">📱</div><div class="btxt"><span class="blabel">抗藍光</span>手機螢幕高能藍光 → 葉黃素是眼睛天然濾鏡，配角膜塑形片更全面</div></div>
+        <div class="bitem"><div class="bico">🔍</div><div class="btxt"><span class="blabel">護黃斑</span>20mg 葉黃素 + 4mg 玉米黃質，延緩近視加深</div></div>
+        <div class="bitem"><div class="bico">☀️</div><div class="btxt"><span class="blabel">戶外護眼</span>羽球訓練紫外線強，雙重保護</div></div>
+      </div>
+      <div class="dbox db-or"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#b45309">怎麼吃</div>早餐後 1 粒，搭配含油脂食物（脂溶性，有油才吸收）。❌ 不要睡前吃，吸收最差。</div></div>
+    </div>
+  </div>
+
+  <div class="alert a-ye">
+    <span>🏸</span>
+    <div class="alert-txt"><div class="alert-title">長高禁忌</div>練完羽球 ❌ 手搖飲、碳酸飲料 → 改喝鮮奶或豆漿。跳殺、大步跨步這種抗重力運動，本身就是刺激骨板生長的最佳方式。</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     珞熙
+══════════════════════════ -->
+<div class="pg" id="c-luo">
+  <div class="banner bl2">
+    <div class="btop">
+      <div class="bemo">👩</div>
+      <div><div class="bname">珞熙</div><div class="brole">高壓工作 · 雷射術後 · 4+2R · 左膝舊傷</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag tb">👁️ 術後護眼</span>
+      <span class="tag tb">🧠 高腦力</span>
+      <span class="tag to">🦵 左膝舊傷</span>
+      <span class="tag tv">🦠 菌叢優化</span>
+      <span class="tag tg">💧 水分 3600cc ✓</span>
+      <span class="tag tp">✨ 水之光</span>
+      <span class="tag tb">⚡ B 群</span>
+    </div>
+  </div>
+
+  <div class="sch">
+    <div class="sch-title">⏰ 每日時程</div>
+    <div class="srows">
+      <div class="srow"><span class="sbadge sbm">☀️ 早上空腹</span><div><div class="sdesc">益生菌 2 包</div><div class="skws"><span class="skw">瘦子菌叢</span></div></div></div>
+      <div class="srow"><span class="sbadge sbo">☕ 咖啡後 1 小時</span><div><div class="sdesc">B 群 2 粒（早餐隨餐）</div><div class="skws"><span class="skw">抗壓護腦</span><span class="skw">補回咖啡流失</span></div></div></div>
+      <div class="srow"><span class="sbadge sbn">🥗 午餐後</span><div><div class="sdesc">葉黃素 1 粒 ＋ 魚油 2 粒 ＋ 益生元纖維 1 勺</div><div class="skws"><span class="skw">護眼</span><span class="skw">護腦</span><span class="skw">消炎</span></div></div></div>
+      <div class="srow"><span class="sbadge sbl">🌙 睡前空腹</span><div><div class="sdesc">水之光膠原 1-2 包 ＋ 鈣鎂鋅 1-2 顆</div><div class="skws"><span class="skw">膝蓋修復</span><span class="skw">助眠</span><span class="skw">全身鎖水</span></div></div></div>
+    </div>
+    <div class="alert a-or" style="margin-top:12px">
+      <span>☕</span>
+      <div class="alert-txt"><div class="alert-title" style="color:#c2410c">黑咖啡注意</div>咖啡因加速 B 群、鎂排出 → 睡眠差、易疲勞的隱因。B 群務必在喝咖啡後 1 小時以上服用。</div>
+    </div>
+  </div>
+
+  <div class="sec">💊 補劑詳情</div>
+
+  <div class="card" id="l1">
+    <div class="card-head" onclick="tog('l1')">
+      <div class="card-ico" style="background:#dbeafe">🐟</div>
+      <div class="card-meta"><div class="card-name">Omega 800 高濃縮魚油</div><div class="card-brand">California Gold Nutrition · rTG 型態</div></div>
+      <div class="pill pb">午餐後 2 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#dbeafe;color:#1d4ed8">💧 緩解乾眼</span>
+        <span style="background:#ede9fe;color:#6d28d9">🧠 護腦提神</span>
+        <span style="background:#dcfce7;color:#15803d">🦵 舊傷消炎</span>
+        <span style="background:#fce7f3;color:#be185d">⚖️ 體脂輔助</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">💧</div><div class="btxt"><span class="blabel">緩解乾眼</span>Omega-3 優化淚液油脂層 → 減少蒸發 → 改善術後乾澀、手機痠痛感</div></div>
+        <div class="bitem"><div class="bico">🧠</div><div class="btxt"><span class="blabel">護腦提神</span>DHA 是大腦結構脂肪，維持高壓工作認知功能，緩解腦霧</div></div>
+        <div class="bitem"><div class="bico">🦵</div><div class="btxt"><span class="blabel">左膝消炎</span>EPA 480mg 減緩膝蓋組織發炎，體脂高=慢性發炎，魚油精準修復</div></div>
+        <div class="bitem"><div class="bico">⚖️</div><div class="btxt"><span class="blabel">體脂輔助</span>Omega-3 輔助脂肪代謝，搭配 4+2R 效果加倍</div></div>
+      </div>
+      <table class="ntbl">
+        <tr><th>成分</th><th>每次（2粒）</th></tr>
+        <tr><td>EPA（消炎）</td><td class="nv">960 mg</td></tr>
+        <tr><td>DHA（護腦護眼）</td><td class="nv">640 mg</td></tr>
+        <tr><td>總 Omega-3</td><td class="nv">1,680 mg</td></tr>
+      </table>
+      <div class="dbox db-bl"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#1d4ed8">怎麼吃</div>午餐後 2 粒（舊傷+重度用眼，2 粒才達足夠消炎量）。與葉黃素同吃效果加倍。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="l2">
+    <div class="card-head" onclick="tog('l2')">
+      <div class="card-ico" style="background:#fef3c7">👁️</div>
+      <div class="card-meta"><div class="card-name">葉黃素 + 玉米黃質</div><div class="card-brand">Doctor's Best · Lutemax 2020</div></div>
+      <div class="pill po">午餐後 1 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fef3c7;color:#b45309">🔬 術後修復</span>
+        <span style="background:#dbeafe;color:#1d4ed8">📱 抗藍光</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🔬</div><div class="btxt"><span class="blabel">術後修復</span>雷射後眼睛更敏感，葉黃素保護黃斑部並輔助細胞修復</div></div>
+        <div class="bitem"><div class="bico">📱</div><div class="btxt"><span class="blabel">抗藍光</span>常看手機 → 藍光累積傷害 → 葉黃素是天然濾鏡屏障</div></div>
+      </div>
+      <div class="dbox db-or"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#b45309">怎麼吃</div>午餐後 1 粒，與魚油一起吃（油脂幫助吸收）。⚠️ 脂溶性，睡前吃吸收最差。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="l3">
+    <div class="card-head" onclick="tog('l3')">
+      <div class="card-ico" style="background:#ede9fe">🦠</div>
+      <div class="card-meta"><div class="card-name">五百億益生菌</div><div class="card-brand">藥師健生活 · 500億CFU · 10種專利菌</div></div>
+      <div class="pill pv">早上空腹 2 包</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#ede9fe;color:#6d28d9">⚖️ 瘦子菌叢</span>
+        <span style="background:#dcfce7;color:#15803d">🧬 菌+元二合一</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">⚖️</div><div class="btxt"><span class="blabel">瘦子菌叢</span>500億CFU活菌快速植入 + 3種複合寡醣確保好菌存活繁殖</div></div>
+        <div class="bitem"><div class="bico">🧬</div><div class="btxt"><span class="blabel">菌+益生元二合一</span>10種專利菌株 + 半乳/乳果/木寡醣，比單純益生菌更全面</div></div>
+      </div>
+      <div class="dbox db-vl"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#6d28d9">怎麼吃</div>早上空腹 2 包。常溫保存、無需冷藏。⚠️ 含牛奶、大豆製品。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="l4">
+    <div class="card-head" onclick="tog('l4')">
+      <div class="card-ico" style="background:#dcfce7">🌿</div>
+      <div class="card-meta"><div class="card-name">益生元纖維 Sunfiber®</div><div class="card-brand">California Gold Nutrition · 低FODMAP</div></div>
+      <div class="pill pg2">午餐後 1 勺</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#dcfce7;color:#15803d">🌱 益菌最佳食物</span>
+        <span style="background:#dbeafe;color:#1d4ed8">🍃 低FODMAP 溫和</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🌱</div><div class="btxt"><span class="blabel">益菌最佳食物</span>五百億益生菌雖含寡醣，再加 Sunfiber® 讓好菌更旺盛、定植更穩</div></div>
+        <div class="bitem"><div class="bico">🍃</div><div class="btxt"><span class="blabel">低FODMAP 溫和</span>4+2R 飲食期腸道敏感，不脹氣、不刺激，維持穩定消化節律</div></div>
+      </div>
+      <div class="dbox db-gr"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#15803d">怎麼吃</div>午餐後 1 勺（6g）加水，可與葉黃素、魚油同時段服用。無味。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="l5">
+    <div class="card-head" onclick="tog('l5')">
+      <div class="card-ico" style="background:#fce7f3">✨</div>
+      <div class="card-meta"><div class="card-name">水之光 機能型膠原蛋白</div><div class="card-brand">日本 PO.OG · 玻尿酸 · GSH · Q10</div></div>
+      <div class="pill pp">睡前空腹 1-2 包</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fce7f3;color:#be185d">✨ 全身鎖水</span>
+        <span style="background:#fef3c7;color:#b45309">🌟 氣色透亮</span>
+        <span style="background:#dcfce7;color:#15803d">🦵 舊傷加固</span>
+        <span style="background:#ede9fe;color:#6d28d9">😴 助眠修復</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">💧</div><div class="btxt"><span class="blabel">全身鎖水 · 緩解乾眼</span>玻尿酸提升組織鎖水力，術後乾眼 + 皮膚乾燥雙重改善</div></div>
+        <div class="bitem"><div class="bico">🌟</div><div class="btxt"><span class="blabel">氣色透亮</span>GSH + 維生素C + Q10 = 美白抗氧化三重組合，對抗藍光自由基</div></div>
+        <div class="bitem"><div class="bico">🦵</div><div class="btxt"><span class="blabel">膝蓋修復</span>日本 PO.OG 小分子膠原蛋白，對關節筋膜修復效率高</div></div>
+        <div class="bitem"><div class="bico">😴</div><div class="btxt"><span class="blabel">改善睡眠</span>GSH 輔助神經放鬆，甘胺酸穩定副交感，改善睡眠品質</div></div>
+      </div>
+      <div class="alert a-rd" style="margin-top:12px">
+        <span>⚠️</span>
+        <div class="alert-txt">楷宸 15歲以下不宜（含 GSH、Q10）</div>
+      </div>
+      <div class="dbox db-pk"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#be185d">怎麼吃</div>睡前空腹 1-2 包，利用睡眠修復組織。建議連續服用 3 個月再評估效果。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="l6">
+    <div class="card-head" onclick="tog('l6')">
+      <div class="card-ico" style="background:#f0fdf4">💊</div>
+      <div class="card-meta"><div class="card-name">鈣鎂鋅 + D3（借用楷宸）</div><div class="card-brand">21st Century · 睡眠調整用</div></div>
+      <div class="pill pg2">睡前 1-2 顆</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#ede9fe;color:#6d28d9">😴 深度助眠</span>
+        <span style="background:#dcfce7;color:#15803d">💪 肌肉放鬆</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">😴</div><div class="btxt"><span class="blabel">深度助眠</span>4+2R 高蛋白飲食鎂可能不足 + 黑咖啡加速鎂流失 → 睡前補鎂效果即時</div></div>
+        <div class="bitem"><div class="bico">💪</div><div class="btxt"><span class="blabel">肌肉放鬆</span>高壓工作讓身體緊繃，鎂是天然鬆弛劑</div></div>
+      </div>
+      <div class="dbox db-gr"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#15803d">怎麼吃</div>睡前 1-2 顆，搭配水之光膠原蛋白同時服用。睡不好時即時見效。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="l7">
+    <div class="card-head" onclick="tog('l7')">
+      <div class="card-ico" style="background:#dbeafe">⚡</div>
+      <div class="card-meta"><div class="card-name">BioActive Complete B-Complex</div><div class="card-brand">Life Extension · 生物活性型態</div></div>
+      <div class="pill pb">早餐後 2 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#dbeafe;color:#1d4ed8">🧠 抗壓護腦</span>
+        <span style="background:#fef3c7;color:#b45309">☕ 補回咖啡流失</span>
+        <span style="background:#dcfce7;color:#15803d">✨ 提升氣色</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">☕</div><div class="btxt"><span class="blabel">補回咖啡因流失</span>黑咖啡加速 B 群從尿液流失 → 這款活性型 B 群即時補回，讓咖啡習慣不成漏洞</div></div>
+        <div class="bitem"><div class="bico">🧠</div><div class="btxt"><span class="blabel">抗壓護腦</span>泛酸 500mg 支援腎上腺抗壓｜B12 甲鈷胺維持神經｜B6 幫助血清素合成 → 改善情緒與睡眠</div></div>
+        <div class="bitem"><div class="bico">✨</div><div class="btxt"><span class="blabel">提升氣色</span>B2/B3 是細胞能量代謝必需，補足後疲勞感與氣色都明顯改善</div></div>
+      </div>
+      <table class="ntbl">
+        <tr><th>成分</th><th>每次（2粒）</th></tr>
+        <tr><td>B12（甲鈷胺）</td><td class="nv">300 mcg</td></tr>
+        <tr><td>葉酸（活性 L-5-MTHF）</td><td class="nv">680 mcg</td></tr>
+        <tr><td>泛酸</td><td class="nv">500 mg</td></tr>
+        <tr><td>生物素（Biotin）</td><td class="nv">1,000 mcg</td></tr>
+      </table>
+      <div class="dbox db-bl"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#1d4ed8">怎麼吃</div>早餐隨餐 2 粒，喝咖啡後至少 1 小時再吃。尿液變黃是正常的（B2 代謝色）。</div></div>
+    </div>
+  </div>
+
+  <div class="alert a-bl">
+    <span>👟</span>
+    <div class="alert-txt"><div class="alert-title">膝蓋保護</div>運動從快走或游泳開始，避免跑步。豆皮油脂高，減脂期選嫩豆腐、無糖豆漿、毛豆。</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     伯涵
+══════════════════════════ -->
+<div class="pg" id="c-bo">
+  <div class="banner bg">
+    <div class="btop">
+      <div class="bemo">💪</div>
+      <div><div class="bname">伯涵</div><div class="brole">羽球教練 · 長站 · 腸胃敏感 · 易長痘</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag tg">🏸 高強度運動</span>
+      <span class="tag to">🫀 腸胃敏感</span>
+      <span class="tag tr">😣 易長痘</span>
+      <span class="tag tv">🦠 腸道重建</span>
+      <span class="tag tp">📱 3C 護眼</span>
+      <span class="tag tb">⚡ B 群</span>
+    </div>
+  </div>
+
+  <div class="sch">
+    <div class="sch-title">⏰ 每日時程</div>
+    <div class="srows">
+      <div class="srow"><span class="sbadge sbm">☀️ 早餐後</span><div><div class="sdesc">益生元纖維 1 勺 ＋ 益生菌 1-2 包</div><div class="skws"><span class="skw">止瀉穩腸</span></div></div></div>
+      <div class="srow"><span class="sbadge sbo">☕ 咖啡後 1 小時</span><div><div class="sdesc">B 群 2 粒（早餐隨餐）</div><div class="skws"><span class="skw">能量代謝</span><span class="skw">祛痘輔助</span></div></div></div>
+      <div class="srow"><span class="sbadge sbn">🥗 任一飯後</span><div><div class="sdesc">葉黃素 1 粒</div><div class="skws"><span class="skw">護眼抗藍光</span></div></div></div>
+      <div class="srow"><span class="sbadge sbl">🌙 晚餐後</span><div><div class="sdesc">魚油 1-2 粒 ＋ 鈣鎂鋅 1 顆</div><div class="skws"><span class="skw">消炎祛痘</span><span class="skw">皮膚修復</span></div></div></div>
+    </div>
+    <div class="alert a-or" style="margin-top:12px">
+      <span>☕</span>
+      <div class="alert-txt"><div class="alert-title" style="color:#c2410c">黑咖啡注意</div>咖啡因加速 B 群與鎂排出，是肌肉疲勞的隱因。B 群喝咖啡後 1 小時以上再吃。</div>
+    </div>
+    <div class="alert a-ye" style="margin-top:8px">
+      <span>💧</span>
+      <div class="alert-txt"><div class="alert-title">今日水分目標</div>1500cc → 目標 <strong>2500-3000cc</strong>。水喝夠，痘痘自然消退一半。</div>
+    </div>
+  </div>
+
+  <div class="sec">💊 補劑詳情</div>
+
+  <div class="card" id="b1">
+    <div class="card-head" onclick="tog('b1')">
+      <div class="card-ico" style="background:#dcfce7">🌿</div>
+      <div class="card-meta"><div class="card-name">益生元纖維 Sunfiber®</div><div class="card-brand">California Gold Nutrition</div></div>
+      <div class="pill pg2">早餐後 1 勺</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#dcfce7;color:#15803d">🚿 止瀉</span>
+        <span style="background:#ede9fe;color:#6d28d9">🌱 益菌食物</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🚿</div><div class="btxt"><span class="blabel">止瀉第一道防線</span>Sunfiber® 像海綿，吸附腸道多餘水分 → 糞便成形 → 停止拉肚子</div></div>
+        <div class="bitem"><div class="bico">🌱</div><div class="btxt"><span class="blabel">益生菌的食物</span>搭配五百億益生菌，確保好菌種下去有東西吃、能活下來</div></div>
+      </div>
+      <div class="dbox db-gr"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#15803d">怎麼吃</div>早餐後 1 勺加水。益生菌和纖維分開時段吃（纖維早飯後、益生菌飯前）效果更好。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="b2">
+    <div class="card-head" onclick="tog('b2')">
+      <div class="card-ico" style="background:#ede9fe">🦠</div>
+      <div class="card-meta"><div class="card-name">五百億益生菌</div><div class="card-brand">藥師健生活 · 500億CFU</div></div>
+      <div class="pill pv">每日 1-2 包</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#dcfce7;color:#15803d">💧 止瀉穩定</span>
+        <span style="background:#ede9fe;color:#6d28d9">🧬 菌相平衡</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">💧</div><div class="btxt"><span class="blabel">止瀉穩定</span>500億CFU快速重建腸道菌叢，平衡菌相，改善反覆腹瀉</div></div>
+        <div class="bitem"><div class="bico">🧬</div><div class="btxt"><span class="blabel">10種菌株複方</span>鼠李糖乳桿菌等 + 3種寡醣，好菌在腸道定植更穩</div></div>
+        <div class="bitem"><div class="bico">📊</div><div class="btxt"><span class="blabel">何時可減量</span>連續 2 週排便成形、每天 1-2 次 → 可降至每日 1 包維持量</div></div>
+      </div>
+      <div class="dbox db-vl"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#6d28d9">怎麼吃</div>每日 1-2 包，飯前飯後皆可。急性不適可暫時吃 2 包。⚠️ 含牛奶、大豆。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="b3">
+    <div class="card-head" onclick="tog('b3')">
+      <div class="card-ico" style="background:#dcfce7">🐟</div>
+      <div class="card-meta"><div class="card-name">Omega 800 高濃縮魚油</div><div class="card-brand">California Gold Nutrition</div></div>
+      <div class="pill pg2">晚餐後 1-2 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fce7f3;color:#be185d">🔥 消炎祛痘</span>
+        <span style="background:#dcfce7;color:#15803d">🫀 腸道屏障</span>
+        <span style="background:#dbeafe;color:#1d4ed8">🦵 關節修復</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">😣</div><div class="btxt"><span class="blabel">消炎祛痘</span>零食=體內發炎。魚油 EPA 從內部滅火 → 改善臉部痘痘</div></div>
+        <div class="bitem"><div class="bico">🫀</div><div class="btxt"><span class="blabel">腸道屏障修復</span>Omega-3 修護腸黏膜，搭配益生元纖維，從根本改善拉肚子體質</div></div>
+        <div class="bitem"><div class="bico">🦵</div><div class="btxt"><span class="blabel">關節修復</span>長站授課對膝蓋腰椎負擔重，魚油減少關節發炎</div></div>
+      </div>
+      <div class="dbox db-gr"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#15803d">怎麼吃</div>晚餐後 1-2 粒。腸胃敏感一定要餐中服用，絕對不要空腹。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="b4">
+    <div class="card-head" onclick="tog('b4')">
+      <div class="card-ico" style="background:#fef3c7">💊</div>
+      <div class="card-meta"><div class="card-name">鈣鎂鋅 + D3</div><div class="card-brand">21st Century · 鋅是祛痘關鍵</div></div>
+      <div class="pill po">晚餐後 1 顆</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fef3c7;color:#b45309">🧴 皮膚修復</span>
+        <span style="background:#dcfce7;color:#15803d">💪 肌肉放鬆</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🧴</div><div class="btxt"><span class="blabel">皮膚修復</span>鋅控油 + 加速痘痘癒合，搭配魚油（內部消炎）= 雙管齊下</div></div>
+        <div class="bitem"><div class="bico">💪</div><div class="btxt"><span class="blabel">肌肉放鬆</span>鎂緩解高強度羽球訓練後的緊繃，加速恢復</div></div>
+      </div>
+      <div class="dbox db-or"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#b45309">怎麼吃</div>晚餐後 1 顆，與魚油同時服用。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="b5">
+    <div class="card-head" onclick="tog('b5')">
+      <div class="card-ico" style="background:#fef3c7">👁️</div>
+      <div class="card-meta"><div class="card-name">葉黃素 + 玉米黃質</div><div class="card-brand">Doctor's Best · Lutemax 2020</div></div>
+      <div class="pill po">飯後 1 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fef3c7;color:#b45309">📱 抗藍光</span>
+        <span style="background:#dcfce7;color:#15803d">☀️ 戶外護眼</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">📱</div><div class="btxt"><span class="blabel">護眼抗藍光</span>常看手機 → 藍光累積傷害 → 葉黃素天然保護屏障</div></div>
+        <div class="bitem"><div class="bico">☀️</div><div class="btxt"><span class="blabel">戶外護眼</span>戶外羽球訓練紫外線強，同時抵禦陽光傷害</div></div>
+      </div>
+      <div class="dbox db-or"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#b45309">怎麼吃</div>任一飯後 1 粒，搭配含油脂餐食（脂溶性，有油才吸收）。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="b6">
+    <div class="card-head" onclick="tog('b6')">
+      <div class="card-ico" style="background:#dbeafe">⚡</div>
+      <div class="card-meta"><div class="card-name">BioActive Complete B-Complex</div><div class="card-brand">Life Extension · 生物活性型態</div></div>
+      <div class="pill pb">早餐後 2 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#dcfce7;color:#15803d">⚡ 能量代謝</span>
+        <span style="background:#fce7f3;color:#be185d">😣 祛痘輔助</span>
+        <span style="background:#fef3c7;color:#b45309">☕ 補回流失</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">⚡</div><div class="btxt"><span class="blabel">能量代謝主力</span>B1/B2/B3 是 ATP 直接原料，高強度訓練消耗暴增，補足後體力恢復明顯加快</div></div>
+        <div class="bitem"><div class="bico">😣</div><div class="btxt"><span class="blabel">祛痘輔助</span>B6 調節皮脂腺 + Biotin 1000mcg 維持皮膚細胞，與鋅協同抗痘</div></div>
+        <div class="bitem"><div class="bico">🫀</div><div class="btxt"><span class="blabel">腸道神經支援</span>B12 甲鈷胺支援腸道神經系統，有助改善腸胃敏感的神經調控</div></div>
+      </div>
+      <div class="dbox db-bl"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#1d4ed8">怎麼吃</div>早餐隨餐 2 粒，喝咖啡後 1 小時以上再吃。尿液變黃正常（B2 代謝色）。</div></div>
+    </div>
+  </div>
+
+  <div class="alert a-ye">
+    <span>🏸</span>
+    <div class="alert-txt"><div class="alert-title">腸皮軸線</div>痘痘 = 腸胃失衡的外在表現。腸胃改善 + 水喝夠 → 痘痘通常自然消退一半。零食換成無調味堅果或希臘優格。長站穿壓縮襪，休息時做「勾腳尖」。</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     媽媽
+══════════════════════════ -->
+<div class="pg" id="c-mom">
+  <div class="banner bo">
+    <div class="btop">
+      <div class="bemo">👵</div>
+      <div><div class="bname">媽媽</div><div class="brole">63歲 · 高血壓高膽固醇用藥 · 胃食道逆流</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag to">❤️ 心血管</span>
+      <span class="tag tr">🔥 胃食道逆流</span>
+      <span class="tag tg">🌿 溫和整腸</span>
+      <span class="tag tp">✨ 水之光</span>
+      <span class="tag tb">⚡ B 群</span>
+    </div>
+  </div>
+
+  <div class="sch">
+    <div class="sch-title">⏰ 每日時程</div>
+    <div class="srows">
+      <div class="srow"><span class="sbadge sbm">☀️ 飯前 15 分</span><div><div class="sdesc">益生元纖維 半-1 勺（溫水）</div><div class="skws"><span class="skw">吸脂排油</span><span class="skw">穩壓穩醣</span></div></div></div>
+      <div class="srow"><span class="sbadge sbm">☀️ 早餐隨餐</span><div><div class="sdesc">B 群 1 粒（低劑量開始）</div><div class="skws"><span class="skw">B12 神經</span><span class="skw">照顧者體力</span></div></div></div>
+      <div class="srow"><span class="sbadge sbn">🥗 吃飯到一半</span><div><div class="sdesc">魚油 1-2 粒（食物包覆）</div><div class="skws"><span class="skw">清血管</span><span class="skw">降膽固醇</span></div></div></div>
+      <div class="srow"><span class="sbadge sbl">🌙 睡前空腹</span><div><div class="sdesc">水之光膠原蛋白 1-2 包</div><div class="skws"><span class="skw">骨關節潤滑</span><span class="skw">心血管抗氧化</span></div></div></div>
+    </div>
+    <div class="alert a-rd" style="margin-top:12px">
+      <span>🚨</span>
+      <div class="alert-txt"><div class="alert-title">服藥者必看</div>水之光含 Q10 → 若服用抗凝血藥（Warfarin）嚴禁食用。B 群高劑量 B3 可能與 Statin 類降血脂藥加重副作用 → 從 1 粒開始。所有保健品與藥物間隔至少 2 小時。</div>
+    </div>
+  </div>
+
+  <div class="sec">💊 補劑詳情</div>
+
+  <div class="card" id="m1">
+    <div class="card-head" onclick="tog('m1')">
+      <div class="card-ico" style="background:#dcfce7">🌿</div>
+      <div class="card-meta"><div class="card-name">益生元纖維 Sunfiber®</div><div class="card-brand">California Gold Nutrition · 低FODMAP</div></div>
+      <div class="pill pg2">飯前 半-1 勺</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#dcfce7;color:#15803d">🧽 吸脂排油</span>
+        <span style="background:#dbeafe;color:#1d4ed8">🫁 排空減壓</span>
+        <span style="background:#fce7f3;color:#be185d">✅ 不脹氣</span>
+        <span style="background:#fef3c7;color:#b45309">📊 穩壓穩醣</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🧽</div><div class="btxt"><span class="blabel">吸脂排油</span>腸道的「吸油面紙」，吸附膽固醇，幫助降低血脂</div></div>
+        <div class="bitem"><div class="bico">🫁</div><div class="btxt"><span class="blabel">排空減壓</span>食物順利往下 → 減少胃部積食上湧 → 直接改善胃食道逆流</div></div>
+        <div class="bitem"><div class="bico">✅</div><div class="btxt"><span class="blabel">低FODMAP 不脹氣</span>一般纖維發酵產氣加重逆流，Sunfiber® 極溫和，逆流患者專屬</div></div>
+        <div class="bitem"><div class="bico">📊</div><div class="btxt"><span class="blabel">穩壓穩醣</span>穩定飯後血糖與血壓，輔助高血壓藥物效果</div></div>
+      </div>
+      <div class="dbox db-gr"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#15803d">怎麼吃</div>從半勺開始，加溫水攪拌，飯前 15 分或隨餐皆可。適應後加至 1 勺。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="m2">
+    <div class="card-head" onclick="tog('m2')">
+      <div class="card-ico" style="background:#fef3c7">🐟</div>
+      <div class="card-meta"><div class="card-name">Omega 800 高濃縮魚油</div><div class="card-brand">California Gold Nutrition</div></div>
+      <div class="pill po">吃飯一半時 1-2 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fef3c7;color:#b45309">🩸 清血管</span>
+        <span style="background:#fce7f3;color:#be185d">📉 降膽固醇</span>
+        <span style="background:#dcfce7;color:#15803d">🔥 食道修復</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🩸</div><div class="btxt"><span class="blabel">清血管</span>EPA 480mg 維持健康血脂，輔助高血壓與高膽固醇用藥</div></div>
+        <div class="bitem"><div class="bico">📉</div><div class="btxt"><span class="blabel">降三酸甘油酯</span>Omega-3 改善膽固醇比例</div></div>
+        <div class="bitem"><div class="bico">🔥</div><div class="btxt"><span class="blabel">食道黏膜修復</span>逆流長期導致食道慢性發炎，魚油天然抗炎輔助修復</div></div>
+      </div>
+      <div class="dbox db-or"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#b45309">怎麼吃</div>「吃飯吃到一半」馬上吃，食物包覆魚油，避免魚腥味逆流。⚠️ 手術（含牙科）前暫停，諮詢醫師。夏天放冰箱冷藏。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="m3">
+    <div class="card-head" onclick="tog('m3')">
+      <div class="card-ico" style="background:#fce7f3">✨</div>
+      <div class="card-meta"><div class="card-name">水之光 機能型膠原蛋白</div><div class="card-brand">日本 PO.OG · 玻尿酸 · Q10</div></div>
+      <div class="pill pp">睡前空腹 1-2 包</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#fef3c7;color:#b45309">🦴 骨關節潤滑</span>
+        <span style="background:#fce7f3;color:#be185d">❤️ 心血管抗氧化</span>
+        <span style="background:#dcfce7;color:#15803d">💧 全身鎖水</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🦴</div><div class="btxt"><span class="blabel">骨關節潤滑</span>63 歲後膠原蛋白流失加速，PO.OG 小分子直接作用關節與軟骨</div></div>
+        <div class="bitem"><div class="bico">❤️</div><div class="btxt"><span class="blabel">心血管抗氧化</span>Q10 保護心臟肌肉，與魚油搭配效果更好</div></div>
+        <div class="bitem"><div class="bico">💧</div><div class="btxt"><span class="blabel">全身鎖水</span>玻尿酸改善關節滑液與皮膚保濕</div></div>
+      </div>
+      <div class="alert a-rd" style="margin-top:10px">
+        <span>🚨</span>
+        <div class="alert-txt">含 Q10 → 服用 Warfarin 嚴禁！確認藥物清單後再服用。建議連續 3 個月再評估效果。</div>
+      </div>
+      <div class="dbox db-pk"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#be185d">怎麼吃</div>睡前空腹 1-2 包，睡眠時修復組織，吸收效率最高。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="m4">
+    <div class="card-head" onclick="tog('m4')">
+      <div class="card-ico" style="background:#dbeafe">⚡</div>
+      <div class="card-meta"><div class="card-name">BioActive Complete B-Complex</div><div class="card-brand">Life Extension · 從 1 粒低劑量</div></div>
+      <div class="pill pb">早餐後 1 粒</div><div class="chev">⌄</div>
+    </div>
+    <div class="card-body">
+      <div class="divider"></div>
+      <div class="kwrow">
+        <span style="background:#dbeafe;color:#1d4ed8">🧠 B12 神經保護</span>
+        <span style="background:#fef3c7;color:#b45309">❤️ 心血管輔助</span>
+        <span style="background:#dcfce7;color:#15803d">💪 照顧者體力</span>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bico">🧠</div><div class="btxt"><span class="blabel">B12 神經保護</span>63 歲後胃酸減少，B12 吸收下降。甲鈷胺型不需胃酸轉化，直接吸收，老年人最佳選擇</div></div>
+        <div class="bitem"><div class="bico">❤️</div><div class="btxt"><span class="blabel">心血管輔助</span>活性葉酸 + B6 + B12 降同半胱胺酸，減少心血管疾病風險</div></div>
+        <div class="bitem"><div class="bico">💪</div><div class="btxt"><span class="blabel">照顧者體力</span>照顧小孩耗體力，B 群是能量代謝燃料，補足後疲勞感明顯改善</div></div>
+      </div>
+      <div class="alert a-or" style="margin-top:10px">
+        <span>⚠️</span>
+        <div class="alert-txt"><div class="alert-title" style="color:#c2410c">藥物交互</div>高劑量 B3 可能與 Statin 類降血脂藥加重副作用。從 1 粒開始，無不適後維持，有疑慮請諮詢醫師。</div>
+      </div>
+      <div class="dbox db-bl"><div class="dbox-ico">⏰</div><div class="dbox-txt"><div class="dbox-title" style="color:#1d4ed8">怎麼吃</div>早餐隨餐 1 粒（半劑量，63 歲適用）。尿液變黃是正常的（B2 代謝色）。</div></div>
+    </div>
+  </div>
+
+  <div class="alert a-ye">
+    <span>🍽️</span>
+    <div class="alert-txt"><div class="alert-title">胃食道逆流生活管理</div>
+      <strong>乾濕分離</strong>：吃飯不配大量湯水，飯後 1 小時再喝水<br>
+      <strong>慢食</strong>：每口嚼 20 下<br>
+      <strong>抱小孩</strong>：先蹲下再起立，不要彎腰<br>
+      <strong>睡姿</strong>：採左側睡或墊高枕頭，褲頭不要勒緊
+    </div>
+  </div>
+</div>
+
+<script>
+function sw(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
+  document.querySelector('.tab[data-id="'+id+'"]').classList.add('active');
+  document.getElementById('c-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function tog(id){
+  document.getElementById(id).classList.toggle('open');
+}
+</script>
+</body>
+</html>
